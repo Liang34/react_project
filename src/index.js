@@ -1,17 +1,28 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
-import './index.css';
-import App from './App';
-import reportWebVitals from './reportWebVitals';
+/*
+入口JS
+ */
+import React from 'react'
+import ReactDOM from 'react-dom'
+import {HashRouter, Switch, Route} from 'react-router-dom'
+import {Provider} from 'react-redux'
 
-ReactDOM.render(
-  <React.StrictMode>
-    <App />
-  </React.StrictMode>,
-  document.getElementById('root')
-);
+import store from './redux/store'
+import Rigister from './containers/register/register'
+import Login from './containers/login/login'
+import Main from './containers/main/main'
 
-// If you want to start measuring performance in your app, pass a function
-// to log results (for example: reportWebVitals(console.log))
-// or send to an analytics endpoint. Learn more: https://bit.ly/CRA-vitals
-reportWebVitals();
+import './assets/css/index.less'
+
+// import './test/socketio_test'
+
+ReactDOM.render((
+  <Provider store={store}>
+    <HashRouter>
+      <Switch>
+        <Route path="/register" component={Rigister}/>
+        <Route path="/login" component={Login}/>
+        <Route component={Main}></Route> 默认路由
+      </Switch>
+    </HashRouter>
+  </Provider>
+), document.getElementById('root'))
